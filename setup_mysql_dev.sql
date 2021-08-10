@@ -1,5 +1,6 @@
 -- create mysql server for application --
 
+-- create main db --
 CREATE DATABASE IF NOT EXISTS hbnb_dev db;
 
 -- create main user --
