@@ -118,65 +118,49 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """ Create an object of any class"""
 
-        args = args.split(" ")
+        argsArray = args.split(" ")
+        className = argsArray[0]
+        argsArray.pop(0)
 
-        if not args[0]:
+        if not className:
             print("** class doesn't exist **")
             return
-        elif args[0] not in HBNBCommand.classes:
+        elif className not in HBNBCommand.classes:
             print("** class not found in dictionary **")
             return
 
-        new_instance = HBNBCommand.classes[args[0]]()
+        new_instance = HBNBCommand.classes[className]()
         storage.save()
-        '''
-        print("New instance created {}".format(new_instance.id))
-        storage.save()
-        '''
-        if len(args) > 1:
-            """ check if 2nd argument is passed """
-            attrs = args[1].split("=")
-            """
-            print("{}={}".format(attrs[0], attrs[1]))
-            #stringArgs = "INSTANCE ({}),  ID ({}), ATTR ({}),\
-                    VALUE ({})".format(new_instance, new_instance.id,\
-                    attrs[0], attrs[1])
-            """
-            stringArgs = "{} {} {} {}".format(
+
+        # print('--------------------------------------------')
+        # print("New instance created!")
+        # print(new_instance)
+        # print(" ")
+        stringArgs = "{} {}".format(
                     new_instance.__class__.__name__,
-                    new_instance.id, attrs[0], attrs[1])
-            # print(new_instance)
-            self.do_update(stringArgs)
-            print(new_instance)
-            # HBNBCommand.do_update(stringArgs)
-            # new_instance.do_update(stringArgs)
-            storage.save()
-
-        if not args:
-            print("** class name missing **")
-            return
-
-        args = args.split(" ")
-
-        if args[0] not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return
-
-        myClass = HBNBCommand.classes[args[0]]
-        storage.save()
-        print("New instance created {}".format(myClass.id))
+                    new_instance.id)
 
         if len(args) > 1:
             """ check if 2nd argument is passed """
 
-            attrs = args[1].split("=")
-            print("{}={}".format(attrs[0], attrs[1]))
-            """
-            do_update (<class_name>  <class.id>  <attr name>  <attr_val>)
-            """
-            stringArgs = "{} {} {} {}".format(
-                    myClass, myClass.id, attrs[0], attrs[1])
-            HBNBCommand.do_update(stringArgs)
+            for parameter in argsArray:
+                # print(parameter)
+                keyPair = parameter.split("=")
+                # print(keyPair)
+                key = keyPair[0]
+                value = keyPair[1]
+                stringArgs = "{} {} {} {}".format(
+                    new_instance.__class__.__name__,
+                    new_instance.id, key, value)
+
+                # print(stringArgs)
+                self.do_update(stringArgs)
+
+                # stringArgs = stringArgs + ' ' + key + ' ' + value
+
+            # print(new_instance)
+            # print("New instance updated!")
+            print(new_instance)
             storage.save()
 
     def help_create(self):
