@@ -107,15 +107,17 @@ class HBNBCommand(cmd.Cmd):
 
     def help_EOF(self):
         """ Prints the help documentation for EOF """
+
         print("Exits the program without formatting\n")
 
     def emptyline(self):
         """ Overrides the emptyline method of CMD """
+
         pass
 
     def do_create(self, args):
         """ Create an object of any class"""
-<<<<<<< HEAD
+
         args = args.split(" ")
 
         if not args[0]:
@@ -136,17 +138,20 @@ class HBNBCommand(cmd.Cmd):
             attrs = args[1].split("=")
             """
             print("{}={}".format(attrs[0], attrs[1]))
-            #stringArgs = "INSTANCE ({}),  ID ({}), ATTR ({}), VALUE ({})".format(new_instance, new_instance.id, attrs[0], attrs[1])
+            #stringArgs = "INSTANCE ({}),  ID ({}), ATTR ({}),\
+                    VALUE ({})".format(new_instance, new_instance.id,\
+                    attrs[0], attrs[1])
             """
-            stringArgs = "{} {} {} {}".format(new_instance.__class__.__name__, new_instance.id, attrs[0], attrs[1])
-            '''print(new_instance)'''
+            stringArgs = "{} {} {} {}".format(
+                    new_instance.__class__.__name__,
+                    new_instance.id, attrs[0], attrs[1])
+            # print(new_instance)
             self.do_update(stringArgs)
             print(new_instance)
-            #HBNBCommand.do_update(stringArgs)
-            #new_instance.do_update(stringArgs)
+            # HBNBCommand.do_update(stringArgs)
+            # new_instance.do_update(stringArgs)
             storage.save()
 
-=======
         if not args:
             print("** class name missing **")
             return
@@ -163,18 +168,20 @@ class HBNBCommand(cmd.Cmd):
 
         if len(args) > 1:
             """ check if 2nd argument is passed """
+
             attrs = args[1].split("=")
             print("{}={}".format(attrs[0], attrs[1]))
             """
             do_update (<class_name>  <class.id>  <attr name>  <attr_val>)
             """
-            stringArgs = "{} {} {} {}".format(myClass, myClass.id, attrs[0], attrs[1])
+            stringArgs = "{} {} {} {}".format(
+                    myClass, myClass.id, attrs[0], attrs[1])
             HBNBCommand.do_update(stringArgs)
             storage.save()
->>>>>>> fd1e125c692010683381cf055ea5b2c6228a9e35
 
     def help_create(self):
         """ Help information for the create method """
+
         print("Creates a class of any type")
         print("[Usage]: create <className>\n")
 
