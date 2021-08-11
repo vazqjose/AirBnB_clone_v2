@@ -132,6 +132,8 @@ class HBNBCommand(cmd.Cmd):
         new_instance = HBNBCommand.classes[className]()
         storage.save()
 
+        print(new_instance.id)
+
         # print('--------------------------------------------')
         # print("New instance created!")
         # print(new_instance)
@@ -140,27 +142,24 @@ class HBNBCommand(cmd.Cmd):
                     new_instance.__class__.__name__,
                     new_instance.id)
 
+
         if len(args) > 1:
             """ check if 2nd argument is passed """
 
             for parameter in argsArray:
                 # print(parameter)
                 keyPair = parameter.split("=")
-                # print(keyPair)
                 key = keyPair[0]
                 value = keyPair[1]
                 stringArgs = "{} {} {} {}".format(
                     new_instance.__class__.__name__,
                     new_instance.id, key, value)
 
-                # print(stringArgs)
                 self.do_update(stringArgs)
-
-                # stringArgs = stringArgs + ' ' + key + ' ' + value
 
             # print(new_instance)
             # print("New instance updated!")
-            print(new_instance)
+            # print(new_instance)
             storage.save()
 
     def help_create(self):
