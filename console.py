@@ -157,8 +157,10 @@ class HBNBCommand(cmd.Cmd):
 
                 if '\"' in keyPair[1]:
                     value = (keyPair[1])[1:-1]
+                    if '_' in value:
+                        value = value.replace('_', ' ')
                 else:
-                    value = keyPair[1]
+                    value = eval(keyPair[1])
                 '''
                 stringArgs = "{} {} {} {}".format(
                     new_instance.__class__.__name__,
