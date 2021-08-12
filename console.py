@@ -152,7 +152,6 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
             for parameter in argsArray:
-                # print(parameter)
                 keyPair = parameter.split('=')
                 key = keyPair[0]
 
@@ -160,10 +159,13 @@ class HBNBCommand(cmd.Cmd):
                     value = (keyPair[1])[1:-1]
                 else:
                     value = keyPair[1]
-
+                """
                 stringArgs = "{} {} {} {}".format(
                     new_instance.__class__.__name__,
                     new_instance.id, key, value)
+                """
+                stringArgs = "{} {} {} {}".format(
+                    className, new_instance.id, key, value)
 
                 HBNBCommand.do_update(self, stringArgs)
                 storage.save()
