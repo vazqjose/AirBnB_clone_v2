@@ -118,49 +118,48 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """ Create an object of any class"""
 
-        argsArray = args.split(" ")
-        className = argsArray[0]
-        argsArray.pop(0)
+        if args:
+            argsArray = args.split(' ')
+            className = argsArray[0]
+        else:
+            return
 
         if not className:
             print("** class doesn't exist **")
             return
         elif className not in HBNBCommand.classes:
-            print("** class not found in dictionary **")
+            print("** class not found **")
             return
 
-        new_instance = HBNBCommand.classes[className]()
-        storage.save()
+        if len(argsArray) == 1:
+            new_instance = HBNBCommand.classes[className]()
+            storage.save()
+            print(new_instance.id)
 
-        print(new_instance.id)
+            # print('--------------------------------------------')
+            # print("New instance created!")
+            # print(new_instance)
+            # print(" ")
 
-        # print('--------------------------------------------')
-        # print("New instance created!")
-        # print(new_instance)
-        # print(" ")
-        stringArgs = "{} {}".format(
-                    new_instance.__class__.__name__,
-                    new_instance.id)
-
-
-        if len(args) > 1:
-            """ check if 2nd argument is passed """
+        elif len(argsArray) > 1:
+            argsArray.pop(0)
+            new_instance = HBNBCommand.classes[className]()
+            storage.save()
+            print(new_instance.id)
 
             for parameter in argsArray:
                 # print(parameter)
-                keyPair = parameter.split("=")
+                keyPair = parameter.split('=')
                 key = keyPair[0]
                 value = keyPair[1]
+
                 stringArgs = "{} {} {} {}".format(
                     new_instance.__class__.__name__,
                     new_instance.id, key, value)
 
-                self.do_update(stringArgs)
+                HBNBCommand.do_update(self, stringArgs)
+                storage.save()
 
-            # print(new_instance)
-            # print("New instance updated!")
-            # print(new_instance)
-            storage.save()
 
     def help_create(self):
         """ Help information for the create method """
