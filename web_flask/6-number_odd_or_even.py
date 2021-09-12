@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 '''
-Write a script that starts a Flask web application
+    Write a script that starts a Flask web application,
+    must be listening on 0.0.0.0, port 5000
 '''
 
 
@@ -10,7 +11,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def index():
     """ display “Hello HBNB!” """
 
@@ -37,8 +38,7 @@ def c(text):
 def py(text='is cool'):
     '''The default value of text is “is cool” '''
 
-    text = text.replace("_", " ")
-    return "Python " + text
+    return "Python {}".format(text.replace('_', ' '))
 
 
 @app.route('/number/<int:n>')
@@ -59,19 +59,17 @@ def template(n):
 
 @app.route('/number_odd_or_even/<int:n>')
 def odd_or_even(n):
-    ''' display a HTML page only if n is an even/odd integer '''
 
     if isinstance(n, int):
         if n % 2 == 0:
-            res = 'even'
+            res = "even"
         else:
-            res = 'odd'
+            res = "odd"
+
         return render_template(
                 '6-number_odd_or_even.html', number=n, evenodd=res)
 
 
 if __name__ == "__main__":
-    ''' run() method of Flask class runs the application '''
-
     app.url_map.strict_slashes = False
     app.run(host='0.0.0.0', port=5000)

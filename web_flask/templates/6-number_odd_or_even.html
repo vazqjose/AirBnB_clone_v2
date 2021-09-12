@@ -4,7 +4,7 @@
         <TITLE>HBNB</TITLE>
     </HEAD>
     <BODY>
-		<h1>{{ number }} is {{ evenodd }}</h1>
+		<h1>Number: {{ number }} is {% if number is odd %}odd{% else %}even{% endif %}</h1>
     </BODY>
 </HTML>
 
