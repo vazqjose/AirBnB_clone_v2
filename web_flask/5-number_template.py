@@ -49,11 +49,9 @@ def number(n):
 
 
 @app.route('/number_template/<int:n>')
-def template(n):
-    ''' display a HTML page only if n is an integer '''
-
+def number_template(n):
     if isinstance(n, int):
-        return render_template('index.html', number=n)
+        return render_template('/5-number.html', n=n)
 
 
 if __name__ == "__main__":
