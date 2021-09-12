@@ -16,7 +16,7 @@ def index():
 
 
 @app.route('/hbnb')
-def index():
+def hbnb():
     ''' 1st option of route '''
 
     return "HBNB"
