@@ -31,18 +31,17 @@ def python_text(text="is cool"):
     return "Python {}".format(text.replace('_', ' '))
 
 
-@app.route('/number/<int:n>')
+@app.route('/number/<int:n>', strict_slashes = False)
 def number(n):
     if isinstance(n, int):
         return "{} is a number".format(n)
 
 
-@app.route('/number_template/<int:n>')
+@app.route('/number_template/<int:n>', strict_slashes = False)
 def number_template(n):
     if isinstance(n, int):
         return render_template('/5-number.html', n=n)
 
 if __name__ == "__main__":
     app.debug = True
-    app.url_map.strict_slashes = False
     app.run(host="0.0.0.0", port=5000)
