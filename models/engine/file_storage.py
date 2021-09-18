@@ -36,8 +36,9 @@ class FileStorage:
         """ Delete object from storage """
         if obj is None:
             return
+
         if  obj.to_dict()['__class__'] + '.' + obj.id in self.__objects:
-            self.__objects.pop(obj.to_dict()['__class__' ]+ '.' + obj.id)
+            self.__objects.pop(obj.to_dict()['__class__'] + '.' + obj.id)
             self.save()
 
     def reload(self):
